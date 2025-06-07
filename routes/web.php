@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\WelcomeController;
+use App\Models\Staff;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,3 +15,10 @@ Route::get('/hello', function () {
 
 
 Route::get('/show', [WelcomeController::class, 'show']);
+
+
+Route::get('/staff', function () {
+    return view('staff', [
+        'staffs' => Staff::all()
+    ]);
+});
