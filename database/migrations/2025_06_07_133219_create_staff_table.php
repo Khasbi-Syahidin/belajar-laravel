@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('age')->nullable();
+            $table->integer(column: 'age')->nullable();
             $table->string('phone')->nullable();
             $table->enum('status', ['single', 'married'])->default('single');
             $table->enum('gender', ['male', 'female'])->default('male');
