@@ -28,3 +28,5 @@ Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.stor
 Route::get('/staff/{id}', [StaffController::class, 'edit'])->name('staff.edit');
 
 Route::post('/staff/update/{id}', [StaffController::class, 'update'])->name('staff.update');
+
+Route::post('/staff/delete/{id}', [StaffController::class, 'delete'])->name('staff.delete');

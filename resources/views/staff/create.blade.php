@@ -30,8 +30,19 @@
                         Buat Staff Baru
                     </h1>
                 </div>
-                <form action={{ route('staff.store') }} method="POST" class="flex flex-col gap-7 p-6">
+                <form action={{ route('staff.store') }} method="POST" enctype="multipart/form-data" class="flex flex-col gap-7 p-6">
                     @csrf
+                    <div class="flex gap-1 flex-col">
+                        <label for="avatar" class="font-bold text-slate-800">Photo Staff</label>
+                        <input type="file" id="avatar" name="avatar" value="{{ old('avatar') }}"
+                            placeholder="Masukan Nama Staff"
+                            class="w-full px-3 h-12 rounded-xl shadow-sm border border-slate-300">
+                        @error('avatar')
+                            <div class="text-red-500 text-xs mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div class="flex gap-1 flex-col">
                         <label for="name" class="font-bold text-slate-800">Nama Staff</label>
                         <input type="text" id="name" name="name" value="{{ old('name') }}"

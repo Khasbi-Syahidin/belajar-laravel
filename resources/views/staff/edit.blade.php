@@ -12,11 +12,23 @@
             <div class="border border-slate-500 rounded-xl w-fit mx-auto my-20 p-7 shadow-xl">
                 <div class="header py-4 mx-auto">
                     <h1 class="text-black font-bold text-center text-3xl">
-                        Edit Staff Baru
+                        Edit Staff
                     </h1>
                 </div>
-                <form action={{ route('staff.update', $staff->id) }} method="POST" class="flex flex-col gap-7 p-6">
+                <form action={{ route('staff.update', $staff->id) }} method="POST" enctype="multipart/form-data" class="flex flex-col gap-7 p-6">
                     @csrf
+                    <div class="flex gap-1 flex-col">
+                        <img src="{{ $staff->avatar ? asset('storage/' . $staff->avatar) : asset('storage/default-avatar.png') }}" alt="" class="w-14 h-14 rounded-2xl overflow-hidden">
+                        <label for="avatar" class="font-bold text-slate-800">Photo Staff</label>
+                        <input type="file" id="avatar" name="avatar" value="{{ $staff->avatar }}"
+                            placeholder="Masukan Photo Staff"
+                            class="w-full px-3 h-12 rounded-xl shadow-sm border border-slate-300">
+                        @error('avatar')
+                            <div class="text-red-500 text-xs mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div class="flex gap-1 flex-col">
                         <label for="name" class="font-bold text-slate-800">Nama Staff</label>
                         <input type="text" id="name" name="name" value="{{ $staff->name }}"
