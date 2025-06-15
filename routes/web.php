@@ -17,14 +17,14 @@ Route::get('/hello', function () {
 
 Route::get('/show', [WelcomeController::class, 'show']);
 
-Route::get('/staff', function () {
-    return view('staff', [
-        'staffs' => Staff::all()
-    ]);
-});
+Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
 
 Route::get('/staff/create', function () {
     return view('staff.create');
 })->name('staff.create');
 
 Route::post('/staff/store', [StaffController::class, 'store'])->name('staff.store');
+
+Route::get('/staff/{id}', [StaffController::class, 'edit'])->name('staff.edit');
+
+Route::post('/staff/update/{id}', [StaffController::class, 'update'])->name('staff.update');
