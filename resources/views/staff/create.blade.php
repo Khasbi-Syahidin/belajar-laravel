@@ -1,36 +1,23 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('head')
+    <title>List Data Staff</title>
+@endsection
 
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endif
-
-</head>
-
-<body class="m-0 p-0">
-
+@section('content')
     @extends('components.navbar')
 
     <section class="w-full">
         <div class="container mx-auto w-full">
-            <div class="border border-slate-500 rounded-xl w-fit mx-auto my-20 p-7 shadow-xl">
-                <div class="header py-4 mx-auto">
-                    <h1 class="text-black font-bold text-center text-3xl">
-                        Buat Staff Baru
+            <div class="border border-slate-500 rounded-xl w-fit mx-auto my-20 p-10 shadow-xl">
+                <div class="flex w-fit h-fit gap-2 mb-8">
+                    <div class="w-2 rounded-xl bg-red-500">
+                    </div>
+                    <h1 class="text-black font-bold  text-center text-3xl">
+                        Buat Staff
                     </h1>
                 </div>
-                <form action={{ route('staff.store') }} method="POST" enctype="multipart/form-data" class="flex flex-col gap-7 p-6">
+                <form action={{ route('staff.store') }} method="POST" enctype="multipart/form-data" class="flex flex-col gap-7">
                     @csrf
                     <div class="flex gap-1 flex-col">
                         <label for="avatar" class="font-bold text-slate-800">Photo Staff</label>
@@ -157,6 +144,4 @@
             </div>
         </div>
     </section>
-</body>
-
-</html>
+@endsection

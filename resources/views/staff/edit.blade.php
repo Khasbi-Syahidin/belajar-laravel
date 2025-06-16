@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
-    <title>List Data Staff</title>
+    <title>Edit Data Staff</title>
 @endsection
 
 @section('content')
@@ -9,13 +9,15 @@
 
     <section class="w-full">
         <div class="container mx-auto w-full">
-            <div class="border border-slate-500 rounded-xl w-fit mx-auto my-20 p-7 shadow-xl">
-                <div class="header py-4 mx-auto">
-                    <h1 class="text-black font-bold text-center text-3xl">
+            <div class="border border-slate-500 rounded-xl w-fit mx-auto my-20 p-10 shadow-xl">
+                <div class="flex w-fit h-fit gap-2 mb-8">
+                    <div class="w-2 rounded-xl bg-red-500">
+                    </div>
+                    <h1 class="text-black font-bold  text-center text-3xl">
                         Edit Staff
                     </h1>
                 </div>
-                <form action={{ route('staff.update', $staff->id) }} method="POST" enctype="multipart/form-data" class="flex flex-col gap-7 p-6">
+                <form action={{ route('staff.update', $staff->id) }} method="POST" enctype="multipart/form-data" class="flex flex-col gap-7 ">
                     @csrf
                     <div class="flex gap-1 flex-col">
                         <img src="{{ $staff->avatar ? asset('storage/' . $staff->avatar) : asset('storage/default-avatar.png') }}" alt="" class="w-14 h-14 rounded-2xl overflow-hidden">

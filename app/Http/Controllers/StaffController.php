@@ -33,9 +33,7 @@ class StaffController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if($request->file('avatar')){
-            $path = $request->file('avatar')->store('staff', 'public');
-        }
+
         $staff = Staff::create([
             'name' => $request->name,
             'age' => $request->age,
@@ -45,11 +43,16 @@ class StaffController extends Controller
             'height' => $request->height,
             'weight' => $request->weight,
             'address' => $request->address,
-            'avatar' => $path,
         ]);
 
+        if ($request->file('avatar')) {
+            $path = $request->file('avatar')->store('staff', 'public');
+            $staff->avatar = $path;
+            $staff->save();
+        }
+
         if ($staff) {
-            return redirect()->route('staff.create')->with('success', 'Staff created successfully');
+            return redirect()->route('staff.index')->with('success', 'Staff created successfully');
         }
     }
     public function edit($id)
@@ -62,11 +65,13 @@ class StaffController extends Controller
     {
         $staff = Staff::findOrFail($id);
 
-        if($request->file('avatar')){
-            if($staff->avatar){
+        if ($request->file('avatar')) {
+            if ($staff->avatar) {
                 Storage::delete($staff->avatar);
             }
             $path = $request->file('avatar')->store('staff', 'public');
+            $staff->avatar = $path;
+            $staff->save();
         }
         $staff->update([
             'name' => $request->name,
@@ -77,7 +82,6 @@ class StaffController extends Controller
             'height' => $request->height,
             'weight' => $request->weight,
             'address' => $request->address,
-            'avatar' => $path,
         ]);
         return redirect()->route('staff.index')->with('success', 'Staff updated successfully');
     }
