@@ -24,9 +24,12 @@
                             href="{{ route('staff.create') }}"> Tambah Staff</a></button>
                 </div>
                 @if (session('success'))
-                    <div class="w-full p-5 bg-green-300 rounded-[8px]">
-                        {{ session('success') }}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            title: "{{ session('success') }}",
+                            icon: "success"
+                        });
+                    </script>
                 @endif
                 <div class="overflow-x-auto rounded-xl shadow-md border border-gray-300">
                     <table class="min-w-full text-left border-collapse">
@@ -73,10 +76,11 @@
                                                     </svg>
                                                 </button>
                                             </a>
-                                            <form action="{{ route('staff.delete', $staff->id) }}" method="POST"
-                                                onsubmit="return confirmDelete()">
+                                            <form id="delete-form-{{ $staff->id }}" action="{{ route('staff.delete', $staff->id) }}" method="POST">
                                                 @csrf
                                                 <button
+                                                    onclick="confirmDelete({{ $staff->id }})"
+                                                    type="button"
                                                     class="p-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition">
                                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -100,7 +104,13 @@
 
 
     <script>
-        function confirmDelete() {
+        // Swal.fire({
+        //     title: "Good job!",
+        //     text: "You clicked the button!",
+        //     icon: "success"
+        // });
+
+        function confirmDelete(id) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -111,11 +121,7 @@
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
+                    document.getElementById('delete-form-' + id).submit();
                 }
             });
         }
