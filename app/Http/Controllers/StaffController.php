@@ -12,7 +12,7 @@ class StaffController extends Controller
 
     public function index()
     {
-        $staff = Staff::all();
+        $staff = Staff::paginate(5);
         return view('staff.index', ['staffs' => $staff]);
     }
     public function store(Request $request)
