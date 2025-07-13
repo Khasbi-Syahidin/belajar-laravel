@@ -6,16 +6,15 @@ use App\Models\Staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\StaffResource;
 
 class StaffController extends Controller
 {
     public function index(Request $request)
     {
         $staffs = Staff::all();
-
-        return response()->json([
-            'data' => $staffs
-        ]);
+        $datas = StaffResource::collection($staffs);
+        return response()->json($datas);
     }
 
 

@@ -15,7 +15,6 @@ Route::get('/', function(){
     ]);
 });
 
-
 Route::get('/staff', [StaffController::class, 'index']);
 Route::get('/staff/{key}', [StaffController::class, 'find']);
 Route::post('/staff', [StaffController::class, 'create']);
